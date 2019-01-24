@@ -1,4 +1,4 @@
-import py3nextion_lib as nxlib # simple python3 library to use nextion device
+import nextion_lib as nxlib # simple python3 library to use nextion device
 import nextionApp as nxApp # initialization of the components
 from time import sleep
 
