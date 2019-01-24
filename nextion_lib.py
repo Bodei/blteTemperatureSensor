@@ -1,9 +1,7 @@
-#uncoment lines below to use the examples in the bottom of file
-
 import serial
-BAUD =38400   # for new monitor please put 9600 and then run nx_setsys(ser, 'bauds', newBAUD)
+BAUD = 9600   # for new monitor please put 9600 and then run nx_setsys(ser, 'bauds', newBAUD)
 ser = serial.Serial(
-  port='/dev/ttyAMA0',
+  port='/dev/ttyS0',
   baudrate = BAUD,
   parity=serial.PARITY_NONE,
   stopbits=serial.STOPBITS_ONE,
@@ -11,7 +9,6 @@ ser = serial.Serial(
   timeout=0.15)
 
 ser.reset_output_buffer()
-
 EndCom = "\xff\xff\xff"
 
 def nx_setsys(ser, sysvar,value):  # Set system variables. sysvar as text. example: sysvar='dim'
@@ -78,7 +75,7 @@ def nx_getValue(ser, pageID, componentID):  # Returns the .val from a component 
         pass
 
 def nx_setText(ser, pageID, componentID, text):  # writes the text in the text component atribute .txt
-    text = 'p[' + str(pageID) + '].b[' + str(componentID)+']''.txt="' + text + '"'
+    text = 'p[' + str(pageID) + '].b[' + str(componentID)+']''.txt="' + str(text) + '"'
     ser.write((text+EndCom).encode('latin-1'))
     return None
 
@@ -92,12 +89,12 @@ def nx_setValue(ser, pageID, componentID, value):  # writes the value in the num
 
 #nx_setsys(ser, 'bauds', BAUD)  # set default baud
 
-#nx_setsys(ser, 'dim',80)                    # sets backlight of device 1 to 100
+#nx_setsys(ser, 'dim',20)                    # sets backlight of device 1 to 100
 #nx_setsys(ser, 'bkcmd',0)     # avoids receiving bytes used in debugging
 
 #nx_setcmd_1par(ser, 'page','initial')       # go to page named 'initial'
 #nx_setcmd_0par(ser, 'rest')                 # reboot the device
 
 #nx_getValue(ser, 2,3)
-#nx_setText(ser, 2,3,'3000')
+#nx_setText(ser, 0,5,'30')
 #nx_setValue(ser, pageID=4,componentID=3,80)
